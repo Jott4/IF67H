@@ -1,3 +1,4 @@
+import "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import useCachedResources from "./src/hooks/useCachedResources";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";

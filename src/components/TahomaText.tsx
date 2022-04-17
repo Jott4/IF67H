@@ -19,5 +19,9 @@ export default function TahomaText({
     return null;
   }
 
-  return <Text style={{ fontFamily: "Tahoma", fontSize, color }}>{title}</Text>;
+  return (
+    <Text style={{ fontFamily: "Tahoma", fontSize, color, fontWeight: "bold" }}>
+      {title}
+    </Text>
+  );
 }

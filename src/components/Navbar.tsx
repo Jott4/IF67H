@@ -2,9 +2,14 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Text } from "./Themed";
 import Icon from "@expo/vector-icons/Feather";
-import { Navigation } from "../types/navigation";
 
-export default function Navbar({ title }: { title: string }) {
+export default function Navbar({
+  title,
+  navigation,
+}: {
+  title: string;
+  navigation: any;
+}) {
   return (
     <View style={styles.container}>
       <Icon
@@ -12,7 +17,9 @@ export default function Navbar({ title }: { title: string }) {
         size={32}
         color="white"
         onPress={() => {
-          console.log("eai");
+          console.log(navigation);
+
+          navigation.openDrawer();
         }}
       />
       <Text style={styles.title}>{title}</Text>

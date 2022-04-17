@@ -9,7 +9,7 @@ import {
 import FaIcon from "@expo/vector-icons/FontAwesome5";
 import TahomaText from "./TahomaText";
 interface ICollectionCard {
-  image: string;
+  image: any;
   title: string;
   onPress: () => void;
 }
@@ -22,7 +22,7 @@ export default function CollectionCard({
   return (
     <Pressable style={styles.container} onPress={onPress}>
       <View style={styles.center}>
-        <Image source={require("../assets/collections/Ball.png")} />
+        <Image source={image} />
         <View style={styles.text}>
           <TahomaText title={title} fontSize={36} color="#27aca7"></TahomaText>
         </View>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: "space-between",
     alignItems: "center",
-    marginVertical: 20,
+    marginVertical: 10,
   },
   center: {
     display: "flex",

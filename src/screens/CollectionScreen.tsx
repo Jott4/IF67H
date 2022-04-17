@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
+import CardViewer from "../components/CardViewer";
 import Navbar from "../components/Navbar";
 import TextInput from "../components/TextInput";
+import { theme } from "../core/theme";
 import { Navigation } from "../types/navigation";
 
 export default function CollectionScreen({
@@ -12,22 +14,33 @@ export default function CollectionScreen({
 }) {
   const [filter, setFilter] = useState("");
   return (
-    <>
-      <Navbar title="Coleção" />
-      <View>
-        <TextInput
-          label="Filtro"
-          returnKeyType="next"
-          value={filter}
-          onChangeText={(text: string) => setFilter(text)}
-          autoComplete={false}
-        />
-        <Button>Jogar!</Button>
-      </View>
-    </>
+    <View style={styles.container}>
+      <TextInput
+        label="Filtro"
+        returnKeyType="next"
+        value={filter}
+        onChangeText={(text: string) => setFilter(text)}
+        autoComplete={false}
+      />
+      <Button mode="contained" style={styles.button}>
+        Jogar!
+      </Button>
+      <CardViewer question="Salve" awnser="Koe" />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  button: {},
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.background,
+    alignItems: "center",
+    padding: 20,
+  },
+  button: {
+    backgroundColor: "#57966A",
+    fontWeight: "bold",
+    marginBottom: 21,
+    marginTop: 10,
+  },
 });

@@ -4,6 +4,7 @@ import HomeScreen from "../screens/HomeScreen";
 
 import LoginScreen from "../screens/LoginScreen";
 import SignUpScreen from "../screens/SignUpScreen";
+import DrawerNavigation from "./DrawerNavigation";
 
 export default function InititalNavigation() {
   const Stack = createNativeStackNavigator();
@@ -18,7 +19,7 @@ export default function InititalNavigation() {
       >
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Home" component={DrawerNavigation} />
       </Stack.Navigator>
     </NavigationContainer>
   );
