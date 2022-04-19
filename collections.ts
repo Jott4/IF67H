@@ -1,54 +1,48 @@
 export default [
   {
+    id: 1,
     title: "Objetos",
     image: require("./src/assets/collections/Ball.png"),
-    collection: [
+    questions: [
       {
         question: "Árvore",
         awnser: "Tree",
       },
       {
-        question: "Árvore",
-        awnser: "Tree",
+        question: "Janela",
+        awnser: "Window",
       },
       {
-        question: "Árvore",
-        awnser: "Tree",
+        question: "Porta",
+        awnser: "Door",
       },
       {
-        question: "Árvore",
-        awnser: "Tree",
+        question: "Parede",
+        awnser: "Wall",
       },
       {
-        question: "Árvore",
-        awnser: "Tree",
+        question: "Chão",
+        awnser: "Floor",
       },
       {
-        question: "Árvore",
-        awnser: "Tree",
+        question: "Cozinha",
+        awnser: "Kitchen",
       },
       {
-        question: "Árvore",
-        awnser: "Tree",
+        question: "Colher",
+        awnser: "Spoon",
       },
       {
-        question: "Árvore",
-        awnser: "Tree",
-      },
-      {
-        question: "Árvore",
-        awnser: "Tree",
-      },
-      {
-        question: "Árvore",
-        awnser: "Tree",
+        question: "Garfo",
+        awnser: "Fork",
       },
     ],
   },
   {
+    id: 2,
     title: "Cores",
     image: require("./src/assets/collections/Colors.png"),
-    collection: [
+    questions: [
       {
         question: "Árvore",
         awnser: "Tree",
@@ -92,9 +86,10 @@ export default [
     ],
   },
   {
+    id: 3,
     title: "Animais",
     image: require("./src/assets/collections/bear.png"),
-    collection: [
+    questions: [
       {
         question: "Árvore",
         awnser: "Tree",
@@ -138,9 +133,10 @@ export default [
     ],
   },
   {
+    id: 4,
     title: "Adjetivos",
     image: require("./src/assets/collections/Tree.png"),
-    collection: [
+    questions: [
       {
         question: "Árvore",
         awnser: "Tree",
@@ -184,9 +180,10 @@ export default [
     ],
   },
   {
+    id: 5,
     title: "Pronomes",
     image: require("./src/assets/collections/Arrow.png"),
-    collection: [
+    questions: [
       {
         question: "Árvore",
         awnser: "Tree",

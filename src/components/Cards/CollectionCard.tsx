@@ -7,7 +7,7 @@ import {
   Pressable,
 } from "react-native";
 import FaIcon from "@expo/vector-icons/FontAwesome5";
-import TahomaText from "./TahomaText";
+import TahomaText from "../Text/TahomaText";
 interface ICollectionCard {
   image: any;
   title: string;
@@ -24,7 +24,9 @@ export default function CollectionCard({
       <View style={styles.center}>
         <Image source={image} />
         <View style={styles.text}>
-          <TahomaText title={title} fontSize={36} color="#27aca7"></TahomaText>
+          <TahomaText style={{ fontSize: 36, color: "#27aca7" }}>
+            {title}
+          </TahomaText>
         </View>
       </View>
       <View style={styles.between}>

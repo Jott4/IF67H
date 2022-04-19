@@ -1,6 +1,5 @@
 import { FlatList, ScrollView, StyleSheet } from "react-native";
-import CollectionCard from "../components/CollectionCard";
-import Navbar from "../components/Navbar";
+import CollectionCard from "../components/Cards/CollectionCard";
 import { View } from "../components/Themed";
 import { theme } from "../core/theme";
 import { Navigation } from "../types/navigation";
@@ -11,12 +10,16 @@ export default function HomeScreen({ navigation }: { navigation: Navigation }) {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        {collections.map((collection, idx) => (
+        {collections.map((collection) => (
           <CollectionCard
-            key={idx}
+            key={collection.id}
             image={collection.image}
             title={collection.title}
-            onPress={() => navigation.navigate("Collection", { collection })}
+            onPress={() =>
+              navigation.navigate("Collection", {
+                id: collection.id,
+              })
+            }
           />
         ))}
       </ScrollView>

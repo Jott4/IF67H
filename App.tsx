@@ -4,7 +4,9 @@ import useCachedResources from "./src/hooks/useCachedResources";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import InititalNavigation from "./src/navigation/InititalNavigation";
 import { initializeApp } from "firebase/app";
-import { StatusBar } from "expo-status-bar";
+
+import { NavigationContainer } from "@react-navigation/native";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBXbeyUqGOfSifIg7s57F6bhaB8iyepAWE",
   authDomain: "mind-booster-b51c1.firebaseapp.com",
@@ -34,10 +36,11 @@ export default function App() {
   } else {
     return (
       <PaperProvider theme={theme}>
-        <SafeAreaProvider>
-          <InititalNavigation />
-          <StatusBar hidden />
-        </SafeAreaProvider>
+        <NavigationContainer>
+          <SafeAreaProvider>
+            <InititalNavigation />
+          </SafeAreaProvider>
+        </NavigationContainer>
       </PaperProvider>
     );
   }
