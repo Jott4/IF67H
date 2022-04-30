@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: theme.colors.background,
+    backgroundColor: "#43405E",
   },
   header: {
     display: "flex",
