@@ -5,6 +5,7 @@ import {
   StyleSheet,
   View,
   Pressable,
+  Alert,
 } from "react-native";
 import FaIcon from "@expo/vector-icons/FontAwesome5";
 import TahomaText from "../Text/TahomaText";
@@ -12,12 +13,14 @@ interface ICollectionCard {
   image: any;
   title: string;
   onPress: () => void;
+  onDelete: () => void;
 }
 
 export default function CollectionCard({
   image,
   title,
   onPress,
+  onDelete,
 }: ICollectionCard) {
   return (
     <Pressable style={styles.container} onPress={onPress}>
@@ -30,10 +33,12 @@ export default function CollectionCard({
         </View>
       </View>
       <View style={styles.between}>
-        <View style={styles.trash}>
-          <FaIcon name="trash-alt" size={32} color="#4472C4" />
-        </View>
-        <FaIcon name="pen" size={32} color="#FF2929" />
+        <Pressable>
+          <FaIcon name="pen" size={32} color="#4472C4" />
+        </Pressable>
+        <Pressable onPress={onDelete}>
+          <FaIcon name="trash-alt" size={32} color="#FF2929" />
+        </Pressable>
       </View>
     </Pressable>
   );
@@ -64,6 +69,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
+    height: 100,
   },
   trash: {
     marginBottom: 25,

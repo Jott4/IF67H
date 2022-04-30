@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { Button } from "react-native-paper";
+import { Button, FAB, Paragraph, Portal, Provider } from "react-native-paper";
 import collections from "../../collections";
+import { RootStackScreenProps } from "../../types";
+import { CardAwnser } from "../components/Cards/CardAwnser";
 import CardViewer from "../components/Cards/CardViewer";
 import HelveticaText from "../components/Text/HelveticaText";
 import TahomaText from "../components/Text/TahomaText";
+import Dialog from "react-native-dialog";
 
 import TextInput from "../components/TextInput";
 import { Text } from "../components/Themed";
@@ -13,12 +16,12 @@ import { theme } from "../core/theme";
 
 export default function CollectionScreen({
   route,
-}: {
-  route: {
-    params: { id: number; collection: { question: string; awnser: string }[] };
-  };
-}) {
-  const allQuestions = route.params.collection;
+  navigation,
+}: RootStackScreenProps<"Collection">) {
+  const allQuestions = collections.find(
+    (collection) => collection.id === route.params.id
+  )?.questions;
+
   if (!allQuestions) {
     return <View></View>;
   }
@@ -26,6 +29,8 @@ export default function CollectionScreen({
   const [questions, setQuestions] = useState(allQuestions);
   const [filter, setFilter] = useState("");
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     setQuestions(
@@ -44,6 +49,39 @@ export default function CollectionScreen({
 
   return (
     <View style={styles.container}>
+      <Dialog.Container
+        visible={visible}
+        contentStyle={{
+          backgroundColor: "#332E56",
+          borderColor: "#DED5EA",
+          borderWidth: 2,
+          margin: 50,
+        }}
+      >
+        <Dialog.Description style={{ color: "#f7f7f7", fontSize: 16 }}>
+          Você tem certeza que deseja excluir esse cartão?
+        </Dialog.Description>
+        <View
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            flexDirection: "row",
+            backgroundColor: "#332e56",
+          }}
+        >
+          <Dialog.Button
+            label="SIM"
+            onPress={() => setVisible(false)}
+            style={{ color: "#f7f7f7" }}
+          />
+          <Dialog.Button
+            label="CANCELAR"
+            style={{ color: "#f7f7f7" }}
+            onPress={() => setVisible(false)}
+          />
+        </View>
+      </Dialog.Container>
+
       <ScrollView style={styles.scrollView}>
         <TextInput
           label="Filtro"
@@ -73,9 +111,29 @@ export default function CollectionScreen({
             question={question.question}
             key={question.question}
             awnser={question.awnser}
+            onEdit={() =>
+              navigation.navigate("NewCard", {
+                id: route.params.id,
+                title: route.params.title,
+                question: question.question,
+                awnser: question.awnser,
+                editMode: true,
+              })
+            }
+            onDelete={() => setVisible(true)}
           />
         ))}
       </ScrollView>
+      <FAB
+        style={styles.fab}
+        icon="plus"
+        onPress={() =>
+          navigation.navigate("NewCard", {
+            id: route.params.id,
+            title: route.params.title,
+          })
+        }
+      />
     </View>
   );
 }
@@ -97,7 +155,7 @@ export function Playing({
 
   return (
     <View style={styles.gameContainer}>
-      <TahomaText style={{ fontSize: 18, color: "#FFF" }}>
+      <TahomaText style={{ fontSize: 18, color: "#FFF", fontFamily: "Tahoma" }}>
         Cartão {index + 1} / {questions.length}
       </TahomaText>
 
@@ -163,68 +221,6 @@ export function Playing({
   );
 }
 
-export function CardAwnser({
-  question,
-  awnser,
-}: {
-  question: string;
-  awnser: string;
-}) {
-  return (
-    <View>
-      <View style={{ width: "100%", height: "50%", display: "flex" }}>
-        <HelveticaText
-          style={{
-            fontWeight: "bold",
-            fontSize: 16,
-            color: "#707070",
-            marginTop: 32,
-          }}
-        >
-          Frente
-        </HelveticaText>
-        <HelveticaText
-          style={{
-            fontWeight: "bold",
-            fontSize: 28,
-            color: "#414141",
-            marginTop: 40,
-            alignSelf: "center",
-          }}
-        >
-          {question}
-        </HelveticaText>
-      </View>
-      <View
-        style={{ width: "100%", height: 1, backgroundColor: "#707070" }}
-      ></View>
-      <View style={{ width: "100%", height: "50%", display: "flex" }}>
-        <HelveticaText
-          style={{
-            fontWeight: "bold",
-            fontSize: 16,
-            color: "#707070",
-            marginTop: 32,
-          }}
-        >
-          Verso
-        </HelveticaText>
-        <HelveticaText
-          style={{
-            fontWeight: "bold",
-            fontSize: 28,
-            color: "#414141",
-            marginTop: 40,
-            alignSelf: "center",
-          }}
-        >
-          {awnser}
-        </HelveticaText>
-      </View>
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -267,5 +263,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
 
     paddingHorizontal: 28,
+  },
+  fab: {
+    position: "absolute",
+    margin: 16,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "#7a71af",
   },
 });

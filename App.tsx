@@ -6,6 +6,8 @@ import InititalNavigation from "./src/navigation/InititalNavigation";
 import { initializeApp } from "firebase/app";
 
 import { NavigationContainer } from "@react-navigation/native";
+import DrawerNavigation from "./src/navigation/DrawerNavigation";
+import { useFonts } from "expo-font";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBXbeyUqGOfSifIg7s57F6bhaB8iyepAWE",
@@ -38,7 +40,8 @@ export default function App() {
       <PaperProvider theme={theme}>
         <NavigationContainer>
           <SafeAreaProvider>
-            <InititalNavigation />
+            {/* <InititalNavigation /> */}
+            <DrawerNavigation />
           </SafeAreaProvider>
         </NavigationContainer>
       </PaperProvider>

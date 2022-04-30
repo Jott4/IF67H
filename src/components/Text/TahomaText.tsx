@@ -5,12 +5,15 @@ import { TextProps } from "../Themed";
 
 export default function TahomaText(props: TextProps) {
   const [loaded] = useFonts({
-    Tahoma: require("../../assets/fonts/tahoma.ttf"),
+    Tahoma: require("../../assets/fonts/TahomaRegular.ttf"),
+    "Tahoma Bold": require("../../assets/fonts/TahomaBold.ttf"),
   });
 
   if (!loaded) {
     return null;
   }
 
-  return <Text {...props} style={[props.style, { fontFamily: "Tahoma" }]} />;
+  return (
+    <Text {...props} style={[{ fontFamily: "Tahoma Bold" }, props.style]} />
+  );
 }
