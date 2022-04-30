@@ -53,6 +53,7 @@ const SignUpScreen = ({ navigation }: SignUpProps) => {
       setIsLoading(false);
       return;
     }
+
     if (password.value !== confirmPassword.value) {
       setConfirmPassword({
         ...confirmPassword,

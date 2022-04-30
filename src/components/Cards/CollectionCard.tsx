@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import FaIcon from "@expo/vector-icons/FontAwesome5";
 import TahomaText from "../Text/TahomaText";
+import { theme } from "../../core/theme";
 interface ICollectionCard {
   image: any;
   title: string;
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     backgroundColor: "#FFF",
-    borderColor: "#707070",
+    borderColor: theme.colors.greyText,
     borderWidth: 1,
     borderRadius: 25,
     display: "flex",

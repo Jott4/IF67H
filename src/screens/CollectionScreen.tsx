@@ -52,7 +52,7 @@ export default function CollectionScreen({
       <Dialog.Container
         visible={visible}
         contentStyle={{
-          backgroundColor: "#332E56",
+          backgroundColor: theme.colors.darkBackground,
           borderColor: "#DED5EA",
           borderWidth: 2,
           margin: 50,
@@ -66,7 +66,7 @@ export default function CollectionScreen({
             display: "flex",
             justifyContent: "space-between",
             flexDirection: "row",
-            backgroundColor: "#332e56",
+            backgroundColor: theme.colors.darkBackground,
           }}
         >
           <Dialog.Button
@@ -167,7 +167,7 @@ export function Playing({
             style={{
               fontWeight: "bold",
               fontSize: 28,
-              color: "#414141",
+              color: theme.colors.greyHelvetica,
               alignSelf: "center",
             }}
           >
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: "#FFF",
-    borderColor: "#707070",
+    borderColor: theme.colors.greyText,
     borderWidth: 1,
     borderRadius: 16,
     marginTop: 36,
@@ -269,6 +269,6 @@ const styles = StyleSheet.create({
     margin: 16,
     right: 0,
     bottom: 0,
-    backgroundColor: "#7a71af",
+    backgroundColor: theme.colors.fab,
   },
 });

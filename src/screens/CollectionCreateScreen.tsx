@@ -8,6 +8,7 @@ import TextInput from "../components/TextInput";
 import * as DocumentPicker from "expo-document-picker";
 import { Text } from "../components/Themed";
 import IconMix from "react-native-vector-icons/AntDesign";
+import { theme } from "../core/theme";
 
 export default function CollectionCreateScreen({
   route,
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#332E56",
+    backgroundColor: theme.colors.darkBackground,
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
@@ -151,6 +152,6 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica",
     fontSize: 28,
     fontWeight: "bold",
-    color: "#414141",
+    color: theme.colors.greyHelvetica,
   },
 });

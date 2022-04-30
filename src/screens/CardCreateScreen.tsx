@@ -5,6 +5,7 @@ import { Button } from "react-native-paper";
 import { RootStackScreenProps } from "../../types";
 import HelveticaText from "../components/Text/HelveticaText";
 import TahomaText from "../components/Text/TahomaText";
+import { theme } from "../core/theme";
 
 export default function CardCreateScreen({
   route,
@@ -31,7 +32,7 @@ export default function CardCreateScreen({
                 style={{
                   fontWeight: "bold",
                   fontSize: 16,
-                  color: "#707070",
+                  color: theme.colors.greyText,
                   marginTop: 32,
                 }}
               >
@@ -44,14 +45,18 @@ export default function CardCreateScreen({
               />
             </View>
             <View
-              style={{ width: "100%", height: 1, backgroundColor: "#707070" }}
+              style={{
+                width: "100%",
+                height: 1,
+                backgroundColor: theme.colors.greyText,
+              }}
             ></View>
             <View style={{ width: "100%", height: "50%", display: "flex" }}>
               <HelveticaText
                 style={{
                   fontWeight: "bold",
                   fontSize: 16,
-                  color: "#707070",
+                  color: theme.colors.greyText,
                   marginTop: 32,
                 }}
               >
@@ -104,7 +109,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#332E56",
+    backgroundColor: theme.colors.darkBackground,
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
@@ -116,7 +121,7 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: "#FFF",
-    borderColor: "#707070",
+    borderColor: theme.colors.greyText,
     borderWidth: 1,
     borderRadius: 16,
     marginTop: 36,
@@ -134,6 +139,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 28,
     fontWeight: "bold",
-    color: "#414141",
+    color: theme.colors.greyHelvetica,
   },
 });

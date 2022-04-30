@@ -19,7 +19,7 @@ export default function HomeScreen() {
       <Dialog.Container
         visible={visible}
         contentStyle={{
-          backgroundColor: "#332E56",
+          backgroundColor: theme.colors.darkBackground,
           borderColor: "#DED5EA",
           borderWidth: 2,
           margin: 50,
@@ -33,7 +33,7 @@ export default function HomeScreen() {
             display: "flex",
             justifyContent: "space-between",
             flexDirection: "row",
-            backgroundColor: "#332e56",
+            backgroundColor: theme.colors.darkBackground,
           }}
         >
           <Dialog.Button
@@ -101,6 +101,6 @@ const styles = StyleSheet.create({
     margin: 16,
     right: 0,
     bottom: 0,
-    backgroundColor: "#7a71af",
+    backgroundColor: theme.colors.fab,
   },
 });

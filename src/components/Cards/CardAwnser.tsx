@@ -1,4 +1,5 @@
 import { View } from "react-native";
+import { theme } from "../../core/theme";
 import HelveticaText from "../Text/HelveticaText";
 
 export function CardAwnser({
@@ -15,7 +16,7 @@ export function CardAwnser({
           style={{
             fontWeight: "bold",
             fontSize: 16,
-            color: "#707070",
+            color: theme.colors.greyText,
             marginTop: 32,
           }}
         >
@@ -25,7 +26,7 @@ export function CardAwnser({
           style={{
             fontWeight: "bold",
             fontSize: 28,
-            color: "#414141",
+            color: theme.colors.greyHelvetica,
             marginTop: 40,
             alignSelf: "center",
           }}
@@ -34,14 +35,18 @@ export function CardAwnser({
         </HelveticaText>
       </View>
       <View
-        style={{ width: "100%", height: 1, backgroundColor: "#707070" }}
+        style={{
+          width: "100%",
+          height: 1,
+          backgroundColor: theme.colors.greyText,
+        }}
       ></View>
       <View style={{ width: "100%", height: "50%", display: "flex" }}>
         <HelveticaText
           style={{
             fontWeight: "bold",
             fontSize: 16,
-            color: "#707070",
+            color: theme.colors.greyText,
             marginTop: 32,
           }}
         >
@@ -51,7 +56,7 @@ export function CardAwnser({
           style={{
             fontWeight: "bold",
             fontSize: 28,
-            color: "#414141",
+            color: theme.colors.greyHelvetica,
             marginTop: 40,
             alignSelf: "center",
           }}
