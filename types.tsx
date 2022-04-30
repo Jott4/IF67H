@@ -33,6 +33,8 @@ export type RootStackParamList = {
     id?: number;
     title?: string;
     editMode?: boolean;
+    image?: any;
+    description?: string;
   };
 };
 

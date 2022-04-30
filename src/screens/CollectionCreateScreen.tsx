@@ -1,12 +1,13 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Pressable, StyleSheet, View, Image } from "react-native";
 
 import { Button } from "react-native-paper";
 import { RootStackScreenProps } from "../../types";
-import HelveticaText from "../components/Text/HelveticaText";
 import TahomaText from "../components/Text/TahomaText";
 import TextInput from "../components/TextInput";
+import * as DocumentPicker from "expo-document-picker";
+import { Text } from "../components/Themed";
+import IconMix from "react-native-vector-icons/AntDesign";
 
 export default function CollectionCreateScreen({
   route,
@@ -14,7 +15,17 @@ export default function CollectionCreateScreen({
 }: RootStackScreenProps<"NewCollection">) {
   const [collectionName, setCollectionName] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<any>("");
+
+  useEffect(() => {
+    setCollectionName(route.params.title || "");
+    setDescription(route.params.description || "");
+    if (route.params.image) setImage(route.params.image);
+  }, [route]);
+
+  const _pickDocument = async () => {
+    let result = await DocumentPicker.getDocumentAsync({});
+  };
 
   return (
     <View style={styles.container}>
@@ -38,6 +49,50 @@ export default function CollectionCreateScreen({
             autoComplete={false}
             style={{ paddingBottom: 100 }}
           />
+          <Pressable
+            onPress={() => _pickDocument()}
+            style={{
+              width: "100%",
+              backgroundColor: "#EFEFEF",
+              height: 190,
+              padding: 10,
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: 9,
+            }}
+          >
+            <Text style={{ color: "#6200ee" }}>Imagem</Text>
+            {route.params.editMode ? (
+              image ? (
+                <Image
+                  source={image}
+                  style={{ margin: "auto", alignSelf: "center" }}
+                />
+              ) : (
+                <View></View>
+              )
+            ) : (
+              <IconMix
+                name="plus"
+                size={48}
+                color="#DEDEDE"
+                style={{ margin: "auto", alignSelf: "center" }}
+              />
+            )}
+
+            <View></View>
+          </Pressable>
+          {/* <Button
+            mode="outlined"
+            color="#ffffff"
+            style={{
+              width: "100%",
+              borderColor: "#FFF",
+            }}
+           
+          >
+            Selecionar imagem
+          </Button> */}
         </View>
         <Button
           mode="contained"

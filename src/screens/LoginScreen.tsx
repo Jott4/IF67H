@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { TouchableOpacity, StyleSheet, Text, View, Image } from "react-native";
 import { emailValidator, passwordValidator } from "../core/utils";
 import TextInput from "../components/TextInput";
@@ -27,7 +27,6 @@ const LoginScreen = ({ navigation }: LoginProps) => {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
   const [isLoading, setLoading] = useState(false);
-
   const [passwordVisible, setPasswordVisible] = useState(true);
 
   const _onLoginPressed = async () => {
@@ -44,6 +43,10 @@ const LoginScreen = ({ navigation }: LoginProps) => {
 
     try {
       await login(email.value, password.value);
+      setEmail({ value: "", error: "" });
+      setPassword({ value: "", error: "" });
+      setLoading(false);
+      setPasswordVisible(false);
       navigation.navigate("Home");
     } catch (e) {
       setPassword({ ...password, error: "Email ou senha não conferem" });

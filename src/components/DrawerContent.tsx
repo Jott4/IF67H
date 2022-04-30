@@ -7,7 +7,10 @@ import {
 import { Text } from "react-native-paper";
 import IconMix from "react-native-vector-icons/Entypo";
 
-export function DrawerContent({ navigation }: DrawerContentComponentProps) {
+export function DrawerContent({
+  navigation,
+  logout,
+}: DrawerContentComponentProps & { logout: () => void }) {
   return (
     <DrawerContentScrollView>
       <View style={styles.drawerContent}>
@@ -52,7 +55,7 @@ export function DrawerContent({ navigation }: DrawerContentComponentProps) {
             &nbsp;&nbsp;Minhas coleções
           </Text>
         </Pressable>
-        <View
+        <Pressable
           style={{
             display: "flex",
             flexDirection: "row",
@@ -60,12 +63,13 @@ export function DrawerContent({ navigation }: DrawerContentComponentProps) {
             alignSelf: "flex-start",
             marginTop: 18,
           }}
+          onPress={logout}
         >
           <IconMix name="chevron-left" size={24} color="#FFF" />
           <Text style={{ color: "#FFF", fontSize: 24 }}>
             &nbsp;&nbsp;Logout
           </Text>
-        </View>
+        </Pressable>
       </View>
     </DrawerContentScrollView>
   );

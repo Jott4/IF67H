@@ -2220,6 +2220,87 @@
   dependencies:
     nanoid "^3.1.23"
 
+"@rpldy/life-events@^0.18.2":
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/@rpldy/life-events/-/life-events-0.18.2.tgz#78402bff01c1223af019409c73cf52a3aa2a74b2"
+  integrity sha512-lcCKMXwpzAK9qwpb00s1O0T1TbUpDZRPiqurtOKc8nEOIBubhguVAbTcvex0oCkr+6qpVOtHUfWMxXDUyKE++g==
+  dependencies:
+    "@rpldy/shared" "^0.18.2"
+
+"@rpldy/mock-sender@^0.18.2":
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/@rpldy/mock-sender/-/mock-sender-0.18.2.tgz#6f89a4eff0335d825a2ffe6680a6188205d4d66f"
+  integrity sha512-2sa2OS9aTDF0tZORGyd5DQ28hTVCQXaf7lztfBxHhnXOjDyj93RloB7gQfWGEUFBz+Uo9hbXwGOTCGfXyePUQA==
+  dependencies:
+    "@rpldy/sender" "^0.18.2"
+    "@rpldy/shared" "^0.18.2"
+    "@rpldy/uploader" "^0.18.2"
+
+"@rpldy/sender@^0.18.2":
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/@rpldy/sender/-/sender-0.18.2.tgz#874a48320cdbe8b3a37075f8050fa55cd73fdd3b"
+  integrity sha512-uxrblpGEmFSqaDIXyaHIsW2KdvnBNOZTmnTsIYq/0AZfFYd2RqP76wTbVLbGDGxPfXY182Qw2FFbIvFM+mMU3w==
+  dependencies:
+    "@rpldy/shared" "^0.18.2"
+
+"@rpldy/shared-ui@^0.18.2":
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/@rpldy/shared-ui/-/shared-ui-0.18.2.tgz#e07d69c4bf6fc4dcb71d4da0d8938472049ce54c"
+  integrity sha512-Y79pGKux8xWKJitc6g8u2i6Kp0cN9jwJRTU2Xex6w5zbbKkjjOSirc3OosQ+mrcgVkgOsbvoGJ8k6PYGYnQCtA==
+  dependencies:
+    "@rpldy/shared" "^0.18.2"
+    "@rpldy/uploader" "^0.18.2"
+
+"@rpldy/shared@^0.18.2":
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/@rpldy/shared/-/shared-0.18.2.tgz#b37e996d4ba1c6f1a5242154d044c6ca4b68a303"
+  integrity sha512-13TN0QHshoNVwUe2x9l2WFnE0xUUm/jWXbZuVZTb/VAqxEqZIV3S2cQJLoyv9RECoMiiUPuPEMVBLoRkoN4w2A==
+  dependencies:
+    invariant "^2.2.4"
+    just-throttle "^1.1.0"
+
+"@rpldy/simple-state@^0.18.2":
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/@rpldy/simple-state/-/simple-state-0.18.2.tgz#a48f31d2521c7f9da7a4cfe1602dcf941ac2aec4"
+  integrity sha512-oRWCHtULndyRSHkgUqxSEEYfh/StjEzaB8X/VUG0XDlr7/GWIdLS3UeTveDSyAoUJvo6ep3qIbg2T8GepT2PQw==
+  dependencies:
+    "@rpldy/shared" "^0.18.2"
+
+"@rpldy/upload-button@^0.18.2":
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/@rpldy/upload-button/-/upload-button-0.18.2.tgz#af79ee48507b5182402bc6784ceaf1e7a0137e8b"
+  integrity sha512-52k7y8oZ6x2kfPJpUdtScz+89rGdAaDes1pGR3Av+mgTIF9Q8HiR4Mn3F3bee++kcBqUTxumdXiKyRZZELtZZw==
+  dependencies:
+    "@rpldy/shared-ui" "^0.18.2"
+
+"@rpldy/upload-preview@^0.18.2":
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/@rpldy/upload-preview/-/upload-preview-0.18.2.tgz#1a39a6d97ccb85c4e8653a67f86c0ed650a2d1a4"
+  integrity sha512-Q/fc+CdnBrs9HX+xJLoI0hr7GDC9+Ccrg3LCFjuPhiniy4Qxly4Hwa1n8TwJ52m/bstxouFpsBwSunzjb7PfNg==
+  dependencies:
+    "@rpldy/shared" "^0.18.2"
+    "@rpldy/shared-ui" "^0.18.2"
+
+"@rpldy/uploader@^0.18.2":
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/@rpldy/uploader/-/uploader-0.18.2.tgz#fcb9422f2a49ed23c59baac4cd1ed6e09718af3c"
+  integrity sha512-WEBmq2ahwpXegLd5zTUN6O+HevgyIzry/U/FgeJn2Nkjmgza73lF6QLH9AHt47iBwfnHKZcUNAc4gbzxrhvR+w==
+  dependencies:
+    "@rpldy/life-events" "^0.18.2"
+    "@rpldy/sender" "^0.18.2"
+    "@rpldy/shared" "^0.18.2"
+    "@rpldy/simple-state" "^0.18.2"
+
+"@rpldy/uploady@^0.18.2":
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/@rpldy/uploady/-/uploady-0.18.2.tgz#0d359f566d056e52972b38227a08bacd802c5c6c"
+  integrity sha512-2Q2YAG0g71t2trVC8wJhY6AHcHDdANA5HIqgQs/aH+LSL2Vq0NrjeQLEbw6v1tMxaCKdC1IbPNjQuEBNlpJgvg==
+  dependencies:
+    "@rpldy/life-events" "^0.18.2"
+    "@rpldy/shared" "^0.18.2"
+    "@rpldy/shared-ui" "^0.18.2"
+    "@rpldy/uploader" "^0.18.2"
+
 "@sideway/address@^4.1.3":
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/@sideway/address/-/address-4.1.4.tgz#03dccebc6ea47fdc226f7d3d1ad512955d4783f0"
@@ -3804,6 +3885,14 @@ expo-constants@~13.0.0, expo-constants@~13.0.2:
   integrity sha512-vGs/kI65vplPFvG8z4W1ariGEtVHHp9Avl28G0zJprt2v/q1E/BnXjwvFSBPc1GB+Zb/7crWSHWRwjaFULBjsg==
   dependencies:
     "@expo/config" "^6.0.6"
+    uuid "^3.3.2"
+
+expo-document-picker@~10.1.3:
+  version "10.1.3"
+  resolved "https://registry.yarnpkg.com/expo-document-picker/-/expo-document-picker-10.1.3.tgz#68a82635e9473eb19f128193f1111e7400055a7d"
+  integrity sha512-JKARJBnQ5Aug92hg2MFKrM2LqiMQabcUBYJwBhwSuc0A7dNUeprw0hkaOK0D9Fk7Ae9t+flRX0N5R/aADek3HA==
+  dependencies:
+    "@expo/config-plugins" "^4.0.2"
     uuid "^3.3.2"
 
 expo-error-recovery@~3.0.5:
@@ -5429,6 +5518,11 @@ jszip@^3.6.0:
     pako "~1.0.2"
     readable-stream "~2.3.6"
     set-immediate-shim "~1.0.1"
+
+just-throttle@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/just-throttle/-/just-throttle-1.1.0.tgz#178d305ece9876a8a0759abd8d403aafcc6e4849"
+  integrity sha512-iePC/13XYX1Tyn9C6jY+DG3UEejkDvrKsw5xxgGhtGUwYWmoJm4CoKexscBKELOu3FTyCDzjr21ZJ67AXnz+bg==
 
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"

@@ -2,12 +2,11 @@ import "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import useCachedResources from "./src/hooks/useCachedResources";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-import InititalNavigation from "./src/navigation/InititalNavigation";
 import { initializeApp } from "firebase/app";
 
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigation from "./src/navigation/DrawerNavigation";
-import { useFonts } from "expo-font";
+import InititalNavigation from "./src/navigation/InititalNavigation";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBXbeyUqGOfSifIg7s57F6bhaB8iyepAWE",
@@ -40,8 +39,8 @@ export default function App() {
       <PaperProvider theme={theme}>
         <NavigationContainer>
           <SafeAreaProvider>
-            {/* <InititalNavigation /> */}
-            <DrawerNavigation />
+            <InititalNavigation />
+            {/* <DrawerNavigation /> */}
           </SafeAreaProvider>
         </NavigationContainer>
       </PaperProvider>

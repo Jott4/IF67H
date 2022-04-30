@@ -14,6 +14,7 @@ interface ICollectionCard {
   title: string;
   onPress: () => void;
   onDelete: () => void;
+  onEdit: () => void;
 }
 
 export default function CollectionCard({
@@ -21,6 +22,7 @@ export default function CollectionCard({
   title,
   onPress,
   onDelete,
+  onEdit,
 }: ICollectionCard) {
   return (
     <Pressable style={styles.container} onPress={onPress}>
@@ -33,7 +35,7 @@ export default function CollectionCard({
         </View>
       </View>
       <View style={styles.between}>
-        <Pressable>
+        <Pressable onPress={onEdit}>
           <FaIcon name="pen" size={32} color="#4472C4" />
         </Pressable>
         <Pressable onPress={onDelete}>

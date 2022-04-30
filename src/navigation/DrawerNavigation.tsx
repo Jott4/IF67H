@@ -2,19 +2,21 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import React from "react";
 import CollectionScreen from "../screens/CollectionScreen";
 
-import { Text, View } from "react-native";
 import HomeScreen from "../screens/HomeScreen";
 import { DrawerContent } from "../components/DrawerContent";
-import Navbar from "../components/Navbar";
 import CardCreateScreen from "../screens/CardCreateScreen";
 import CollectionCreateScreen from "../screens/CollectionCreateScreen";
+import LoginScreen from "../screens/LoginScreen";
+import SignUpScreen from "../screens/SignUpScreen";
 
 const Drawer = createDrawerNavigator();
 
-const DrawerNavigation = () => {
+const DrawerNavigation = ({ navigation }: { navigation: any }) => {
   return (
     <Drawer.Navigator
-      drawerContent={(props) => <DrawerContent {...props} />}
+      drawerContent={(props) => (
+        <DrawerContent logout={() => navigation.navigate("Login")} {...props} />
+      )}
       screenOptions={{
         drawerStyle: {
           backgroundColor: "#25213e",
@@ -31,7 +33,12 @@ const DrawerNavigation = () => {
         component={HomeScreen}
         options={{ drawerLabel: "Minhas Coleções", title: "Minhas Coleções" }}
       />
-      <Drawer.Screen name="NewCollection" component={CollectionCreateScreen} />
+
+      <Drawer.Screen
+        options={{ drawerLabel: "Minhas Coleções", title: "Minhas Coleções" }}
+        name="NewCollection"
+        component={CollectionCreateScreen}
+      />
 
       <Drawer.Screen
         name="Collection"

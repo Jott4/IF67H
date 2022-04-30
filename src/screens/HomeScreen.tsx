@@ -61,6 +61,15 @@ export default function HomeScreen() {
                 title: collection.title,
               })
             }
+            onEdit={() =>
+              navigation.navigate("NewCollection", {
+                id: collection.id,
+                title: collection.title,
+                description: "Descrição teste",
+                image: collection.image,
+                editMode: true,
+              })
+            }
             onDelete={() => setVisible(true)}
           />
         ))}
