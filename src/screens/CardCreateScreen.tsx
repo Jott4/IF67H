@@ -79,7 +79,7 @@ export default function CardCreateScreen({
           }}
           onPress={() => {
             navigation.navigate("Collection", {
-              id: route.params.id || 0,
+              id: route.params.id || "",
               title: route.params.title || "",
             });
           }}

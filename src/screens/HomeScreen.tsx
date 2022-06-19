@@ -2,14 +2,23 @@ import { Alert, ScrollView, StyleSheet } from "react-native";
 import CollectionCard from "../components/Cards/CollectionCard";
 import { View } from "../components/Themed";
 import { theme } from "../core/theme";
-import collectionsJSON from "../../collections";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { FAB } from "react-native-paper";
 import Dialog from "react-native-dialog";
+import { deleteCollection, fetchCollections } from "../redux/thunks/collection";
+import { useAppDispatch } from "../hooks/useAppDispatch";
+import { useAppSelector } from "../hooks/useAppSelector";
+import { selectCollections } from "../redux/resolvers/collection";
 
 export default function HomeScreen() {
-  const [collections, setCollections] = useState(collectionsJSON);
+  const dispatch = useAppDispatch();
+  const { collections } = useAppSelector(selectCollections);
+
+  useEffect(() => {
+    dispatch(fetchCollections());
+  }, []);
+
   const navigation = useNavigation();
 
   const [visible, setVisible] = useState(false);
@@ -52,25 +61,25 @@ export default function HomeScreen() {
       <ScrollView style={styles.scrollView}>
         {collections.map((collection) => (
           <CollectionCard
-            key={collection.id}
+            key={collection.uid}
             image={collection.image}
-            title={collection.title}
+            title={collection.name}
             onPress={() =>
               navigation.navigate("Collection", {
-                id: collection.id,
-                title: collection.title,
+                id: collection.uid || "",
+                title: collection.name,
               })
             }
             onEdit={() =>
               navigation.navigate("NewCollection", {
-                id: collection.id,
-                title: collection.title,
+                id: collection.uid,
+                title: collection.name,
                 description: "Descrição teste",
                 image: collection.image,
                 editMode: true,
               })
             }
-            onDelete={() => setVisible(true)}
+            onDelete={() => dispatch(deleteCollection(collection.uid || ""))}
           />
         ))}
       </ScrollView>

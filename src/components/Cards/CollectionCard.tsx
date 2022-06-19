@@ -1,12 +1,4 @@
-import {
-  Image,
-  Text,
-  ImageSourcePropType,
-  StyleSheet,
-  View,
-  Pressable,
-  Alert,
-} from "react-native";
+import { Image, StyleSheet, View, Pressable } from "react-native";
 import FaIcon from "@expo/vector-icons/FontAwesome5";
 import TahomaText from "../Text/TahomaText";
 import { theme } from "../../core/theme";
@@ -28,7 +20,17 @@ export default function CollectionCard({
   return (
     <Pressable style={styles.container} onPress={onPress}>
       <View style={styles.center}>
-        <Image source={image} />
+        <Image
+          source={{
+            uri: image,
+          }}
+          style={{
+            width: 100,
+            height: 50,
+            borderWidth: 1,
+            borderColor: "red",
+          }}
+        />
         <View style={styles.text}>
           <TahomaText style={{ fontSize: 36, color: "#27aca7" }}>
             {title}

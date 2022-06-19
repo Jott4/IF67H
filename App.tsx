@@ -2,22 +2,14 @@ import "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import useCachedResources from "./src/hooks/useCachedResources";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-import { initializeApp } from "firebase/app";
-
+import "./src/firebase/config";
 import { NavigationContainer } from "@react-navigation/native";
-import DrawerNavigation from "./src/navigation/DrawerNavigation";
 import InititalNavigation from "./src/navigation/InititalNavigation";
+import { Provider } from "react-redux";
+import { store } from "./src/redux/store";
+import { LogBox } from "react-native";
 
-const firebaseConfig = {
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: "",
-};
-
-initializeApp(firebaseConfig);
+LogBox.ignoreLogs(["Setting a timer", "AsyncStorage has been extracted"]);
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -36,14 +28,16 @@ export default function App() {
     return null;
   } else {
     return (
-      <PaperProvider theme={theme}>
-        <NavigationContainer>
-          <SafeAreaProvider>
-            <InititalNavigation />
-            {/* <DrawerNavigation /> */}
-          </SafeAreaProvider>
-        </NavigationContainer>
-      </PaperProvider>
+      <Provider store={store}>
+        <PaperProvider theme={theme}>
+          <NavigationContainer>
+            <SafeAreaProvider>
+              <InititalNavigation />
+              {/* <DrawerNavigation /> */}
+            </SafeAreaProvider>
+          </NavigationContainer>
+        </PaperProvider>
+      </Provider>
     );
   }
 }

@@ -13,38 +13,39 @@ import Dialog from "react-native-dialog";
 import TextInput from "../components/TextInput";
 import { Text } from "../components/Themed";
 import { theme } from "../core/theme";
+import { useAppDispatch } from "../hooks/useAppDispatch";
+import { fetchCards } from "../redux/thunks/cards";
+import { useAppSelector } from "../hooks/useAppSelector";
+import { Card, selectCards } from "../redux/resolvers/cards";
 
 export default function CollectionScreen({
   route,
   navigation,
 }: RootStackScreenProps<"Collection">) {
-  const allQuestions = collections.find(
-    (collection) => collection.id === route.params.id
-  )?.questions;
+  const dispatch = useAppDispatch();
+  const { cards } = useAppSelector(selectCards);
 
-  if (!allQuestions) {
-    return <View></View>;
-  }
+  useEffect(() => {
+    if (route.params.id) dispatch(fetchCards(route.params.id));
+  }, [route]);
 
-  const [questions, setQuestions] = useState(allQuestions);
+  useEffect(() => {
+    setFilterCards(cards);
+  }, [cards]);
+
   const [filter, setFilter] = useState("");
   const [isPlaying, setIsPlaying] = useState(false);
 
   const [visible, setVisible] = useState(false);
 
+  const [filterCards, setFilterCards] = useState<Card[]>([]);
+  // filtro
   useEffect(() => {
-    setQuestions(
-      allQuestions.filter((question) => {
-        return (
-          question.question.toLowerCase().includes(filter.toLowerCase()) ||
-          question.awnser.toLowerCase().includes(filter.toLowerCase())
-        );
-      })
-    );
+    filterCards.filter((item) => item.question === filter);
   }, [filter]);
 
   if (isPlaying) {
-    return <Playing questions={allQuestions} setIsPlaying={setIsPlaying} />;
+    return <Playing questions={cards} setIsPlaying={setIsPlaying} />;
   }
 
   return (
@@ -106,7 +107,7 @@ export default function CollectionScreen({
           </Text>
         </Button>
 
-        {questions?.map((question) => (
+        {filterCards?.map((question) => (
           <CardViewer
             question={question.question}
             key={question.question}

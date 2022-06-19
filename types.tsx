@@ -19,18 +19,18 @@ declare global {
 export type RootStackParamList = {
   Home: undefined;
   Collection: {
-    id: number;
+    id: string;
     title: string;
   };
   NewCard: {
-    id?: number;
+    id?: string;
     title?: string;
     editMode?: boolean;
     question?: string;
     awnser?: string;
   };
   NewCollection: {
-    id?: number;
+    id?: string;
     title?: string;
     editMode?: boolean;
     image?: any;

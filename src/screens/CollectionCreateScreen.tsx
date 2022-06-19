@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, StyleSheet, View, Image } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  View,
+  Image,
+  ImageSourcePropType,
+} from "react-native";
 
 import { Button } from "react-native-paper";
 import { RootStackScreenProps } from "../../types";
@@ -9,23 +15,57 @@ import * as DocumentPicker from "expo-document-picker";
 import { Text } from "../components/Themed";
 import IconMix from "react-native-vector-icons/AntDesign";
 import { theme } from "../core/theme";
+import { useAppDispatch } from "../hooks/useAppDispatch";
+import { createCollection, editCollection } from "../redux/thunks/collection";
 
 export default function CollectionCreateScreen({
   route,
   navigation,
 }: RootStackScreenProps<"NewCollection">) {
+  const dispatch = useAppDispatch();
   const [collectionName, setCollectionName] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState<any>("");
+  const [imageURI, setImageURI] = useState<string>("");
 
   useEffect(() => {
     setCollectionName(route.params.title || "");
     setDescription(route.params.description || "");
-    if (route.params.image) setImage(route.params.image);
+    setImageURI(route.params.image);
   }, [route]);
 
   const _pickDocument = async () => {
-    let result = await DocumentPicker.getDocumentAsync({});
+    let document = await DocumentPicker.getDocumentAsync();
+
+    if (document.type === "success") {
+      setImageURI(document.uri);
+    }
+  };
+
+  const addCollection = () => {
+    dispatch(
+      createCollection({
+        name: collectionName,
+        description,
+        image: imageURI,
+      })
+    );
+
+    navigation.goBack();
+  };
+
+  const updateCollection = () => {
+    dispatch(
+      editCollection({
+        newCollection: {
+          name: collectionName,
+          description,
+          image: imageURI,
+        },
+        uid: route.params.id || "",
+      })
+    );
+
+    navigation.goBack();
   };
 
   return (
@@ -64,13 +104,18 @@ export default function CollectionCreateScreen({
           >
             <Text style={{ color: "#6200ee" }}>Imagem</Text>
             {route.params.editMode ? (
-              image ? (
+              imageURI ? (
                 <Image
-                  source={image}
-                  style={{ margin: "auto", alignSelf: "center" }}
+                  source={{ uri: imageURI }}
+                  style={{
+                    margin: "auto",
+                    alignSelf: "center",
+                    width: 300,
+                    height: 150,
+                  }}
                 />
               ) : (
-                <View></View>
+                <></>
               )
             ) : (
               <IconMix
@@ -83,17 +128,6 @@ export default function CollectionCreateScreen({
 
             <View></View>
           </Pressable>
-          {/* <Button
-            mode="outlined"
-            color="#ffffff"
-            style={{
-              width: "100%",
-              borderColor: "#FFF",
-            }}
-           
-          >
-            Selecionar imagem
-          </Button> */}
         </View>
         <Button
           mode="contained"
@@ -103,10 +137,7 @@ export default function CollectionCreateScreen({
             backgroundColor: "#6a61a1",
           }}
           onPress={() => {
-            navigation.navigate("Collection", {
-              id: route.params.id || 0,
-              title: route.params.title || "",
-            });
+            route.params.editMode ? updateCollection() : addCollection();
           }}
         >
           {route.params.editMode ? "Salvar alterações" : "Cadastrar"}
