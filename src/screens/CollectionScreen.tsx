@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { Button, FAB, Paragraph, Portal, Provider } from "react-native-paper";
-import collections from "../../collections";
+import { Button, FAB } from "react-native-paper";
 import { RootStackScreenProps } from "../../types";
 import { CardAwnser } from "../components/Cards/CardAwnser";
 import CardViewer from "../components/Cards/CardViewer";
@@ -14,7 +13,7 @@ import TextInput from "../components/TextInput";
 import { Text } from "../components/Themed";
 import { theme } from "../core/theme";
 import { useAppDispatch } from "../hooks/useAppDispatch";
-import { fetchCards } from "../redux/thunks/cards";
+import { deleteCard, fetchCards } from "../redux/thunks/cards";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { Card, selectCards } from "../redux/resolvers/cards";
 
@@ -25,6 +24,8 @@ export default function CollectionScreen({
   const dispatch = useAppDispatch();
   const { cards } = useAppSelector(selectCards);
 
+  const [selectedCard, setSelectedCard] = useState<Card>();
+
   useEffect(() => {
     if (route.params.id) dispatch(fetchCards(route.params.id));
   }, [route]);
@@ -33,15 +34,15 @@ export default function CollectionScreen({
     setFilterCards(cards);
   }, [cards]);
 
-  const [filter, setFilter] = useState("");
+  // Controller se está jogando ou não
   const [isPlaying, setIsPlaying] = useState(false);
-
   const [visible, setVisible] = useState(false);
 
-  const [filterCards, setFilterCards] = useState<Card[]>([]);
   // filtro
+  const [filter, setFilter] = useState("");
+  const [filterCards, setFilterCards] = useState<Card[]>([]);
   useEffect(() => {
-    filterCards.filter((item) => item.question === filter);
+    setFilterCards(cards.filter((item) => item.question.includes(filter)));
   }, [filter]);
 
   if (isPlaying) {
@@ -72,7 +73,10 @@ export default function CollectionScreen({
         >
           <Dialog.Button
             label="SIM"
-            onPress={() => setVisible(false)}
+            onPress={() => {
+              dispatch(deleteCard(selectedCard?.uid || ""));
+              setVisible(false);
+            }}
             style={{ color: "#f7f7f7" }}
           />
           <Dialog.Button
@@ -107,21 +111,25 @@ export default function CollectionScreen({
           </Text>
         </Button>
 
-        {filterCards?.map((question) => (
+        {filterCards?.map((card) => (
           <CardViewer
-            question={question.question}
-            key={question.question}
-            awnser={question.awnser}
+            question={card.question}
+            key={card.uid}
+            awnser={card.answer}
             onEdit={() =>
               navigation.navigate("NewCard", {
-                id: route.params.id,
+                id: card.uid,
+                colecoesRef: route.params.id,
                 title: route.params.title,
-                question: question.question,
-                awnser: question.awnser,
+                question: card.question,
+                answer: card.answer,
                 editMode: true,
               })
             }
-            onDelete={() => setVisible(true)}
+            onDelete={() => {
+              setSelectedCard(card);
+              setVisible(true);
+            }}
           />
         ))}
       </ScrollView>
@@ -130,8 +138,8 @@ export default function CollectionScreen({
         icon="plus"
         onPress={() =>
           navigation.navigate("NewCard", {
-            id: route.params.id,
             title: route.params.title,
+            colecoesRef: route.params.id,
           })
         }
       />
@@ -143,7 +151,7 @@ export function Playing({
   questions,
   setIsPlaying,
 }: {
-  questions: { question: string; awnser: string }[];
+  questions: Card[];
   setIsPlaying: (isPlaying: boolean) => void;
 }) {
   const [index, setIndex] = useState(0);
@@ -162,7 +170,7 @@ export function Playing({
 
       <View style={styles.card}>
         {isShowingAwnser ? (
-          <CardAwnser question={question.question} awnser={question.awnser} />
+          <CardAwnser question={question.question} awnser={question.answer} />
         ) : (
           <HelveticaText
             style={{

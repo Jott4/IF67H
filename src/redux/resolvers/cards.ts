@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../types/types";
-import { fetchCards } from "../thunks/cards";
+import { createCard, deleteCard, editCard, fetchCards } from "../thunks/cards";
 
 export interface Card {
   uid?: string;
   question: string;
-  awnser: string;
+  answer: string;
+  colecoesRef?: string;
 }
 
 type CardState = { cards: Card[] };
@@ -22,23 +23,23 @@ export const cardSlice = createSlice({
       state.cards = action.payload;
     });
 
-    // builder.addCase(deleteCollection.fulfilled, (state, action) => {
-    //   const filteredCollection = state.collections.filter(
-    //     (collection) => collection.uid !== action.payload
-    //   );
-    //   state.collections = [...filteredCollection];
-    // });
+    builder.addCase(createCard.fulfilled, (state, action) => {
+      // state.cards.push(action.payload);
+    });
 
-    // builder.addCase(createCollection.fulfilled, (state, action) => {
-    //   state.collections.push(action.payload);
-    // });
+    builder.addCase(deleteCard.fulfilled, (state, action) => {
+      const filteredCards = state.cards.filter(
+        (card) => card.uid !== action.payload
+      );
+      state.cards = [...filteredCards];
+    });
 
-    // builder.addCase(editCollection.fulfilled, (state, action) => {
-    //   const filteredCollection = state.collections.filter(
-    //     (collection) => collection.uid !== action.payload.uid
-    //   );
-    //   state.collections = [...filteredCollection, action.payload];
-    // });
+    builder.addCase(editCard.fulfilled, (state, action) => {
+      const filteredCards = state.cards.filter(
+        (card) => card.uid !== action.payload.uid
+      );
+      state.cards = [...filteredCards, action.payload];
+    });
   },
   reducers: {},
 });

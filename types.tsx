@@ -27,7 +27,8 @@ export type RootStackParamList = {
     title?: string;
     editMode?: boolean;
     question?: string;
-    awnser?: string;
+    answer?: string;
+    colecoesRef: string;
   };
   NewCollection: {
     id?: string;

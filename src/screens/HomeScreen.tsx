@@ -3,23 +3,25 @@ import CollectionCard from "../components/Cards/CollectionCard";
 import { View } from "../components/Themed";
 import { theme } from "../core/theme";
 import { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 import { FAB } from "react-native-paper";
 import Dialog from "react-native-dialog";
 import { deleteCollection, fetchCollections } from "../redux/thunks/collection";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { useAppSelector } from "../hooks/useAppSelector";
-import { selectCollections } from "../redux/resolvers/collection";
+import { Collection, selectCollections } from "../redux/resolvers/collection";
+import { RootStackScreenProps } from "../../types";
 
-export default function HomeScreen() {
+export default function HomeScreen({
+  route,
+  navigation,
+}: RootStackScreenProps<"Home">) {
   const dispatch = useAppDispatch();
   const { collections } = useAppSelector(selectCollections);
+  const [selectedCollection, setSelectedCollection] = useState<Collection>();
 
   useEffect(() => {
     dispatch(fetchCollections());
-  }, []);
-
-  const navigation = useNavigation();
+  }, [route]);
 
   const [visible, setVisible] = useState(false);
 
@@ -47,7 +49,10 @@ export default function HomeScreen() {
         >
           <Dialog.Button
             label="SIM"
-            onPress={() => setVisible(false)}
+            onPress={() => {
+              dispatch(deleteCollection(selectedCollection?.uid || ""));
+              setVisible(false);
+            }}
             style={{ color: "#f7f7f7" }}
           />
           <Dialog.Button
@@ -79,7 +84,10 @@ export default function HomeScreen() {
                 editMode: true,
               })
             }
-            onDelete={() => dispatch(deleteCollection(collection.uid || ""))}
+            onDelete={() => {
+              setSelectedCollection(collection);
+              setVisible(true);
+            }}
           />
         ))}
       </ScrollView>

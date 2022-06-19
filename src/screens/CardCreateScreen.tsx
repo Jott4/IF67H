@@ -6,17 +6,45 @@ import { RootStackScreenProps } from "../../types";
 import HelveticaText from "../components/Text/HelveticaText";
 import TahomaText from "../components/Text/TahomaText";
 import { theme } from "../core/theme";
+import { useAppDispatch } from "../hooks/useAppDispatch";
+import { Card } from "../redux/resolvers/cards";
+import { createCard, editCard } from "../redux/thunks/cards";
 
 export default function CardCreateScreen({
   route,
   navigation,
 }: RootStackScreenProps<"NewCard">) {
+  const dispatch = useAppDispatch();
+
   const [question, setQuestion] = useState(route.params.question || "");
-  const [awnser, setAwnser] = useState(route.params.awnser || "");
+  const [answer, setAnswer] = useState(route.params.answer || "");
+
+  const addCard = (card: Card) => {
+    dispatch(createCard(card));
+    navigation.navigate("Collection", {
+      id: route.params.colecoesRef || "",
+      title: route.params.title || "",
+    });
+  };
+  const updateCard = ({ question, answer, uid }: Card) => {
+    dispatch(
+      editCard({
+        newCard: {
+          answer,
+          question,
+        },
+        uid: uid || "",
+      })
+    );
+    navigation.navigate("Collection", {
+      id: route.params.colecoesRef || "",
+      title: route.params.title || "",
+    });
+  };
 
   useEffect(() => {
     setQuestion(route.params.question || "");
-    setAwnser(route.params.awnser || "");
+    setAnswer(route.params.answer || "");
   }, [route]);
 
   return (
@@ -63,8 +91,8 @@ export default function CardCreateScreen({
                 Verso
               </HelveticaText>
               <TextInput
-                onChangeText={(text) => setAwnser(text)}
-                value={awnser}
+                onChangeText={(text) => setAnswer(text)}
+                value={answer}
                 style={styles.input}
               />
             </View>
@@ -78,10 +106,18 @@ export default function CardCreateScreen({
             backgroundColor: "#6a61a1",
           }}
           onPress={() => {
-            navigation.navigate("Collection", {
-              id: route.params.id || "",
-              title: route.params.title || "",
-            });
+            route.params.editMode
+              ? updateCard({
+                  answer,
+                  question,
+                  uid: route.params.id || "",
+                  colecoesRef: route.params.colecoesRef || "",
+                })
+              : addCard({
+                  question,
+                  answer,
+                  colecoesRef: route.params.colecoesRef,
+                });
           }}
         >
           {route.params.editMode ? "Salvar alterações" : "Cadastrar"}
