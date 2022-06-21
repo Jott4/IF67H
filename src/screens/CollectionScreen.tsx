@@ -42,7 +42,11 @@ export default function CollectionScreen({
   const [filter, setFilter] = useState("");
   const [filterCards, setFilterCards] = useState<Card[]>([]);
   useEffect(() => {
-    setFilterCards(cards.filter((item) => item.question.includes(filter)));
+    setFilterCards(
+      cards.filter(
+        (item) => item.question.includes(filter) || item.answer.includes(filter)
+      )
+    );
   }, [filter]);
 
   if (isPlaying) {

@@ -26,9 +26,7 @@ export default function CollectionCard({
           }}
           style={{
             width: 100,
-            height: 50,
-            borderWidth: 1,
-            borderColor: "red",
+            height: 100,
           }}
         />
         <View style={styles.text}>
